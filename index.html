@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="head">
+    <h1 id="heading">WebCric</h1>
+    <div id="nav">
+      <span
+        ><button id="nav-1" class="btn">Team</button
+        ><button id="nav-2" class="btn">Matches</button>
+        <button id="nav-3" class="btn">Point Table</button></span
+      ></div>
+    </div>
+    <div id="team">
+      <div id="teams"></div>
+      <div id="overlay"></div>
+      <div id="popup"></div>
+      <div id="players"></div>
+    </div>
+    <div id="match">
+      <div id="matchTable">
+        <div id="title"></div>
+          <table id="table">
+            <tr id="color">
+              <th class="th">Date</th>
+              <th class="th">Match Details</th>
+              <th class="th">Time</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div id="match-details">
+      <div id="nav-bar">
+        <button id="score-btn">Scorecard</button><button id="squad-btn">Squad</button>
+      </div>
+      <div id="score-card">
+        <div class="team-table" id="team-table-1">
+        </div>
+        <div class="team-table" id="team-table-2">
+        </div>
+      </div>
+      <div id="squad">
+        <div id="squad-1"></div>
+        <div id="squad-2"></div>
+      </div>
+    </div>
+    <div id="point-table-div">
+      <table id="point-table">
+        <tr>
+          <th>Teams</th>
+          <th>Match</th>
+          <th>Won</th>
+          <th>Loss</th>
+          <th>Ties</th>
+          <th>NR</th>
+        </tr>
+      </table>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+{
+    "apikey": "a01ad4f8-0ea2-4300-a22f-adfc3b461bdd",
+    "data": [
+        {
+            "teamname": "Afghanistan",
+            "shortname": "AFG",
+            "img": "https://g.cricapi.com/iapi/1-637877075587179422.webp?w=48",
+            "matches": 7,
+            "wins": 4,
+            "loss": 3,
+            "ties": 0,
+            "nr": 0
+        },
+        {
+            "teamname": "Australia",
+            "shortname": "AUS",
+            "img": "https://g.cricapi.com/iapi/6-637877070670541994.webp?w=48",
+            "matches": 7,
+            "wins": 5,
+            "loss": 2,
+            "ties": 0,
+            "nr": 0
+        },
+        {
+            "teamname": "Bangladesh",
+            "shortname": "BAN",
+            "img": "https://g.cricapi.com/iapi/9-637877074109248302.webp?w=48",
+            "matches": 7,
+            "wins": 1,
+            "loss": 6,
+            "ties": 0,
+            "nr": 0
+        },
+        {
+            "teamname": "England",
+            "shortname": "ENG",
+            "img": "https://g.cricapi.com/iapi/23-637877072894080569.webp?w=48",
+            "matches": 7,
+            "wins": 1,
+            "loss": 6,
+            "ties": 0,
+            "nr": 0
+        },
+        {
+            "teamname": "India",
+            "shortname": "IND",
+            "img": "https://g.cricapi.com/iapi/31-637877061080567215.webp?w=48",
+            "matches": 7,
+            "wins": 7,
+            "loss": 0,
+            "ties": 0,
+            "nr": 0
+        },
+        {
+            "teamname": "Netherlands",
+            "shortname": "NED",
+            "img": "https://g.cricapi.com/iapi/55-637877084465746618.webp?w=48",
+            "matches": 7,
+            "wins": 2,
+            "loss": 5,
+            "ties": 0,
+            "nr": 0
+        },
+        {
+            "teamname": "New Zealand",
+            "shortname": "NZ",
+            "img": "https://g.cricapi.com/iapi/57-637877076980737903.webp?w=48",
+            "matches": 8,
+            "wins": 4,
+            "loss": 4,
+            "ties": 0,
+            "nr": 0
+        },
+        {
+            "teamname": "Pakistan",
+            "shortname": "PAK",
+            "img": "https://g.cricapi.com/iapi/66-637877075103236690.webp?w=48",
+            "matches": 8,
+            "wins": 4,
+            "loss": 4,
+            "ties": 0,
+            "nr": 0
+        },
+        {
+            "teamname": "South Africa",
+            "shortname": "RSA",
+            "img": "https://g.cricapi.com/iapi/82-637877071839088912.webp?w=48",
+            "matches": 7,
+            "wins": 6,
+            "loss": 1,
+            "ties": 0,
+            "nr": 0
+        },
+        {
+            "teamname": "Sri Lanka",
+            "shortname": "SL",
+            "img": "https://g.cricapi.com/iapi/4191-638101639309122979.webp?w=48",
+            "matches": 7,
+            "wins": 2,
+            "loss": 5,
+            "ties": 0,
+            "nr": 0
+        }
+    ],
+    "status": "success",
+    "info": {
+        "hitsToday": 25,
+        "hitsUsed": 1,
+        "hitsLimit": 100,
+        "credits": 0,
+        "server": 9,
+        "queryTime": 35.6924,
+        "s": 0,
+        "cache": 0
+    }
+}
