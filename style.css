@@ -137,7 +137,7 @@
     padding: 20px;
     font-size: 20px ;
     border: 2px solid black;
-    margin: 50px;
+    margin: 50px 150px;
     border-collapse: collapse;
 }
 #table th{
@@ -165,7 +165,7 @@
     padding-left: 40px;
     padding-right: 40px;
 }
-#table #mat{
+#table .mat{
     padding-left: 100px;
 }
 #nav-bar{
@@ -283,12 +283,64 @@
     margin-top:50px ;
     margin-bottom: 50px;
 }
-.team-table h1{
+/* .team-table h1{
     background-color: gray;
-}
+} */
 #team-1{
     border-collapse: collapse;
 }
 #team-2{
     border-collapse: collapse;
+}
+/* #body-div{
+    padding-top: 100px;
+}
+#body-div h3{
+    text-align: center;
+    font-size: 30px;
+    font-family: Oswald;
+} */
+#parent{
+    padding-top: 150px;
+}
+#parent h1{
+    text-align: center;
+    font-family: Oswald;
+    color: red;
+}
+.flag{
+    width: 500px;
+    margin: 50px;
+    text-align: center;
+}
+.flag button{
+    border-radius: 30px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+.flag img{
+    border-radius: 30px;
+    width: 400px;
+    height: 250px;
+}
+#child{
+    display: flex;
+    flex-wrap: wrap;
+}
+.flag img:hover{
+    width: 450px;
+    height: 300px;
+}
+#teams{
+    display: none;
+}
+#title{
+    display: none;
+}
+#squad{
+    display: none;
+}
+#nav{
+    display: none;
 }

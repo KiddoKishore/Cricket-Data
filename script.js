@@ -1,4 +1,11 @@
-let country = "India"
+function update(event){
+    document.getElementById('parent').style.display = 'none';
+    document.getElementById('teams').style.display = 'block';
+    document.getElementById("title").style.display = 'block';
+    document.getElementById('squad').style.display = 'block';
+    document.getElementById('nav').style.display = 'block';
+let country = event
+let apikey = "69c0c2b0-e2fe-4892-a5ba-a3e68293befc"
 fetch(`./team.json`)
     .then(res => res.json())
     .then(data => {
@@ -18,9 +25,9 @@ fetch(`./team.json`)
             let img = `https://cdn.countryflags.com/thumbs/${countryFlags}/flag-400.png`
             const {teamName,shortname} = b
             let teams = document.getElementById("teams")
-            teams.innerHTML = `<img
+            teams.innerHTML = `<a href="#" onclick=country()><img
             src=${img}
-            alt="${teamName}"><br><h1>${shortname}</h1><h2>${teamName}</h2>`
+            alt="${teamName}"></a><br><h1>${shortname}</h1><h2>${teamName}</h2>`
             let x = b.players
             x.forEach(i => {
                 const {playerImg, name, id} = i
@@ -40,7 +47,7 @@ fetch(`./team.json`)
                             let c = b.players
                             let d = c.find((p)=> p.id === id)
                             let f = d.id
-                            fetch(`https://api.cricapi.com/v1/players_info?apikey=69c0c2b0-e2fe-4892-a5ba-a3e68293befc&id=${f}`)
+                            fetch(`https://api.cricapi.com/v1/players_info?apikey=${apikey}&id=${f}`)
                             .then(res => res.json())
                             .then(data => {
                                 if(data.status === "success"){
@@ -86,6 +93,9 @@ fetch(`./team.json`)
                             overlay.style.display = "none"
                         })
                                        
+                                }
+                                else{
+                                    alert("Server Down Please try again later!!!")
                                 }
                             })
                             
@@ -139,10 +149,16 @@ fetch(`./team.json`)
                             // })
                             // over
                         }
+                        else{
+                            alert("Server Down Please try again later!!!")
+                        }
                     })
                 })
                 players.appendChild(details)
             });
+        }
+        else{
+            alert("Server Down Please try again later!!!")
         }
     })
  fetch(`./series.json`)
@@ -172,7 +188,6 @@ fetch(`./team.json`)
                 let a = new Date(time)
                 a.setTime(a.getTime() + 330 * 60 * 1000)
                 let b = a.toLocaleTimeString();
-                console.log(b);
                 tr.innerHTML =  `<td>${date}</td>
                 <td id="mat"><h3>${name}</h3>
                 <h4>${venue}</h4>
@@ -187,7 +202,7 @@ fetch(`./team.json`)
                     navBar.style.display = "block"
                     let matchDetails = document.getElementById("match-details")
                     matchDetails.style.display = "block"
-                    fetch(`https://api.cricapi.com/v1/match_scorecard?apikey=325a73bd-3f37-4eb4-bdfb-b361dc93776e&id=${id}`)
+                    fetch(`https://api.cricapi.com/v1/match_scorecard?apikey=${apikey}&id=${id}`)
                     .then(res => res.json())
                     .then((data)=>{
                         if(data.status === "success"){
@@ -274,6 +289,9 @@ fetch(`./team.json`)
                                 teamTwo.appendChild(trr2)
                             
                         }
+                        else{
+                            alert("Server Down Please try again later!!!")
+                        }
                     document.getElementById("squad-btn").addEventListener("click", (x)=>{
                         x.preventDefault()
                         let a = data.data
@@ -314,12 +332,18 @@ fetch(`./team.json`)
                                     squadTwo.appendChild(player)
                                 })
                             }
+                            else{
+                                alert("Server Down Please try again later!!!")
+                            }
                         })
                     })
                 })
                 })
                 table.appendChild(tr)
             })
+        }
+        else{
+            alert("Server Down Please try again later!!!")
         }
     })
 
@@ -351,6 +375,9 @@ fetch(`./point-table.json`)
                 pointTable.appendChild(tr)
             })
         }
+        else{
+            alert("Server Down Please try again later!!!")
+        }
     })
 
 document.getElementById("nav-1").addEventListener("click",()=>{
@@ -378,3 +405,32 @@ document.getElementById("nav-2").addEventListener("click",async(x)=>{
             squad.style.display = "none"
             document.getElementById("point-table-div").style.display = "none"
 })
+}
+
+
+
+fetch(`./team.json`)
+.then(res => res.json())
+.then((x)=>{
+    if(x.status === "success"){
+    let data = x.data
+    data.forEach((i)=> {
+        let child = document.getElementById("child")
+        let div = document.createElement("div")
+        div.setAttribute('class','flag')
+        let img = i.teamName.toLowerCase()
+        let image = img.replace(" ","-")
+        let a = i.teamName
+        div.innerHTML = `<button onclick="update('${a}')"><img src="https://cdn.countryflags.com/thumbs/${image}/flag-400.png" ></button>
+        <h2>${i.teamName}</h2>
+        <h3>${i.shortname}</h3>`
+        child.appendChild(div)
+    })
+}
+else{
+    alert("Server Down Please try again later!!!")
+}
+})
+function country(){
+    window.location.reload();
+}
