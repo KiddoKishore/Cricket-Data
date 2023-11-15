@@ -1,3 +1,4 @@
+let apikey = "a01ad4f8-0ea2-4300-a22f-adfc3b461bdd"
 function update(event){
     document.getElementById('parent').style.display = 'none';
     document.getElementById('teams').style.display = 'block';
@@ -5,7 +6,6 @@ function update(event){
     document.getElementById('squad').style.display = 'block';
     document.getElementById('nav').style.display = 'block';
 let country = event
-let apikey = "69c0c2b0-e2fe-4892-a5ba-a3e68293befc"
 fetch(`./team.json`)
     .then(res => res.json())
     .then(data => {
@@ -54,13 +54,18 @@ fetch(`./team.json`)
                                     let a = data.data
                                        let date = new Date(a.dateOfBirth)
                                        let DateOfBirth = date.toLocaleDateString()
-                            const {playerImg, name, dateOfBirth, country, placeOfBirth, role, battingStyle, bowlingStyle} = a
+                            let bowlingStyle = a.bowlingStyle || "---" ;
+                            let battingStyle = a.battingStyle || "---";
+                            let role = a.role || "---";
+                            let country = a.country || "---";
+                            let name = a.name || "---";
+                            let placeOfBirth = a.placeOfBirth || "---";
                             let overlay = document.getElementById("overlay")
                             let popup = document.getElementById("popup")
                         overlay.style.display = "block";
                         popup.style.display = "block";
                         popup.innerHTML = `<button class="close">X</button>
-                        <div id="flex"><img src=${playerImg}>
+                        <div id="flex"><img src=${a.playerImg}>
                         <div>
                         <table>
                         <tr>
@@ -95,7 +100,8 @@ fetch(`./team.json`)
                                        
                                 }
                                 else{
-                                    alert("Server Down Please try again later!!!")
+                                    document.getElementById("resonse").innerHTML = data.reason ;
+                                    get();
                                 }
                             })
                             
@@ -158,7 +164,7 @@ fetch(`./team.json`)
             });
         }
         else{
-            alert("Server Down Please try again later!!!")
+            get()
         }
     })
  fetch(`./series.json`)
@@ -290,10 +296,11 @@ fetch(`./team.json`)
                             
                         }
                         else{
-                            alert("Server Down Please try again later!!!")
+                            get()
                         }
                     document.getElementById("squad-btn").addEventListener("click", (x)=>{
                         x.preventDefault()
+                        console.log(data)
                         let a = data.data
                         let t = a.teams
                         let t1 = t[0]
@@ -304,6 +311,12 @@ fetch(`./team.json`)
                         scoreCard.style.display = "none"
                         let squad = document.getElementById("squad")
                         squad.style.display = "flex"
+                        let scroeBtn = document.getElementById("score-btn")
+                        scroeBtn.style.backgroundColor = "red"
+                        scroeBtn.style.color = "white"
+                        let squadBtn = document.getElementById("squad-btn")
+                        squadBtn.style.backgroundColor = "white"
+                        squadBtn.style.color = "red"
                         fetch(`./team.json`)
                         .then(res => res.json())
                         .then((data)=>{
@@ -333,7 +346,7 @@ fetch(`./team.json`)
                                 })
                             }
                             else{
-                                alert("Server Down Please try again later!!!")
+                                get();
                             }
                         })
                     })
@@ -343,7 +356,7 @@ fetch(`./team.json`)
             })
         }
         else{
-            alert("Server Down Please try again later!!!")
+            get();
         }
     })
 
@@ -376,7 +389,7 @@ fetch(`./point-table.json`)
             })
         }
         else{
-            alert("Server Down Please try again later!!!")
+            get();
         }
     })
 
@@ -392,6 +405,12 @@ document.getElementById("score-btn").addEventListener("click",()=>{
     document.getElementById("squad").style.display = "none"
     document.getElementById("team").style.display = "none";
     document.getElementById("match").style.display = "none";
+    let scroeBtn = document.getElementById("score-btn")
+    scroeBtn.style.backgroundColor = "white"
+    scroeBtn.style.color = "red"
+    let squadBtn = document.getElementById("squad-btn")
+    squadBtn.style.backgroundColor = "red"
+    squadBtn.style.color = "white"
 })
 document.getElementById("nav-2").addEventListener("click",async(x)=>{
             let team = document.getElementById("team")
@@ -428,9 +447,20 @@ fetch(`./team.json`)
     })
 }
 else{
-    alert("Server Down Please try again later!!!")
+    get();
 }
 })
 function country(){
     window.location.reload();
+}
+function get(){
+    document.getElementById("error-overlay").style.display = "block"
+    document.getElementById("error-popup").style.display = "block"
+    document.getElementById("submit").addEventListener("click",(x)=>{
+        x.preventDefault()
+        apikey = document.getElementById("error").value ;
+        console.log(apikey);
+        document.getElementById("error-overlay").style.display = "none"
+        document.getElementById("error-popup").style.display = "none"
+    })
 }

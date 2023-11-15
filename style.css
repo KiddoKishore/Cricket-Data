@@ -4,10 +4,11 @@
 }
 #head h1{
     background-color: black;
-    color: white;
+    color: transparent;
     text-align: center;
     padding: 10px;
     font-size: 50px;
+    -webkit-text-stroke: 2px red;
 }
 #head #nav{
     background-color: black;
@@ -183,10 +184,6 @@
     border: none;
     cursor: pointer;
 }
-#nav-bar button:hover{
-    background-color: white;
-    color: red;
-}
 #squad{
     display: flex;
     padding-top: 10%;
@@ -309,9 +306,10 @@
     color: red;
 }
 .flag{
-    width: 500px;
-    margin: 50px;
+    width: 300px;
+    margin: 40px;
     text-align: center;
+    padding: 20px;
 }
 .flag button{
     border-radius: 30px;
@@ -321,16 +319,17 @@
 }
 .flag img{
     border-radius: 30px;
-    width: 400px;
-    height: 250px;
+    width: 300px;
+    height: 175px;
+    box-shadow: 5px 5px 5px black;
 }
 #child{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .flag img:hover{
-    width: 450px;
-    height: 300px;
+    box-shadow: -5px -5px 5px black;
 }
 #teams{
     display: none;
@@ -343,4 +342,51 @@
 }
 #nav{
     display: none;
+}
+#error-overlay{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    background-color: #000000;
+    opacity: 0.8;
+    z-index: 3;
+    display: none;
+}
+#error-popup{
+    position: fixed;
+    background-color: #000000;
+    z-index: 4;
+    top: 20%;
+    left: 35%;
+    color: #ffffff;
+    padding: 20px;
+    width: 400px;
+    display: none;
+}
+form label{
+    font-size: 40px;
+    margin: 10px;
+}
+#error{
+    width: 370px;
+    height: 25px;
+    margin: 10px;
+    font-size: 20px;
+}
+#submit{
+    float: right;
+    width: 35px;
+    font-size: 20px;
+    margin: 10px;
+}
+#error-popup a{
+    margin: 10px;
+}
+#error-popup p{
+    font-size: 25px;
+    color: red;
+    margin: 10px;
+    max-width: 400px;
+    min-width: 100px;
 }
