@@ -183,6 +183,7 @@
     background-color: red;
     border: none;
     cursor: pointer;
+    color: #ffffff;
 }
 #squad{
     display: flex;
@@ -367,6 +368,7 @@
 form label{
     font-size: 40px;
     margin: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 #error{
     width: 370px;

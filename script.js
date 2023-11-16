@@ -1,4 +1,4 @@
-let apikey = "a01ad4f8-0ea2-4300-a22f-adfc3b461bdd"
+let apikey = "69c0c2b0-e2fe-4892-a5ba-a3e68293befc"
 function update(event){
     document.getElementById('parent').style.display = 'none';
     document.getElementById('teams').style.display = 'block';
@@ -25,9 +25,9 @@ fetch(`./team.json`)
             let img = `https://cdn.countryflags.com/thumbs/${countryFlags}/flag-400.png`
             const {teamName,shortname} = b
             let teams = document.getElementById("teams")
-            teams.innerHTML = `<a href="#" onclick=country()><img
+            teams.innerHTML = `<img
             src=${img}
-            alt="${teamName}"></a><br><h1>${shortname}</h1><h2>${teamName}</h2>`
+            alt="${teamName}"><br><h1>${shortname}</h1><h2>${teamName}</h2>`
             let x = b.players
             x.forEach(i => {
                 const {playerImg, name, id} = i
@@ -156,7 +156,8 @@ fetch(`./team.json`)
                             // over
                         }
                         else{
-                            alert("Server Down Please try again later!!!")
+                            document.getElementById("resonse").innerHTML = data.reason ;
+                            get()
                         }
                     })
                 })
@@ -164,6 +165,7 @@ fetch(`./team.json`)
             });
         }
         else{
+            document.getElementById("resonse").innerHTML = data.reason ;
             get()
         }
     })
@@ -202,16 +204,16 @@ fetch(`./team.json`)
                 let matchDetail = tr.querySelector(".matchDetails")
                 matchDetail.addEventListener("click",(x)=>{
                     x.preventDefault()
-                    let match = document.getElementById("match")
-                    let navBar = document.getElementById("nav-bar")
-                    match.style.display = "none"
-                    navBar.style.display = "block"
-                    let matchDetails = document.getElementById("match-details")
-                    matchDetails.style.display = "block"
                     fetch(`https://api.cricapi.com/v1/match_scorecard?apikey=${apikey}&id=${id}`)
                     .then(res => res.json())
                     .then((data)=>{
                         if(data.status === "success"){
+                            let match = document.getElementById("match")
+                            let navBar = document.getElementById("nav-bar")
+                            match.style.display = "none"
+                            navBar.style.display = "block"
+                            let matchDetails = document.getElementById("match-details")
+                            matchDetails.style.display = "block"
                             document.getElementById("score-card").style.display = "block";
                                 let a = data.data
                                 let sc = a.score
@@ -296,6 +298,7 @@ fetch(`./team.json`)
                             
                         }
                         else{
+                            document.getElementById("resonse").innerHTML = data.reason ;
                             get()
                         }
                     document.getElementById("squad-btn").addEventListener("click", (x)=>{
@@ -311,12 +314,6 @@ fetch(`./team.json`)
                         scoreCard.style.display = "none"
                         let squad = document.getElementById("squad")
                         squad.style.display = "flex"
-                        let scroeBtn = document.getElementById("score-btn")
-                        scroeBtn.style.backgroundColor = "red"
-                        scroeBtn.style.color = "white"
-                        let squadBtn = document.getElementById("squad-btn")
-                        squadBtn.style.backgroundColor = "white"
-                        squadBtn.style.color = "red"
                         fetch(`./team.json`)
                         .then(res => res.json())
                         .then((data)=>{
@@ -346,6 +343,7 @@ fetch(`./team.json`)
                                 })
                             }
                             else{
+                                document.getElementById("resonse").innerHTML = data.reason ;
                                 get();
                             }
                         })
@@ -356,42 +354,45 @@ fetch(`./team.json`)
             })
         }
         else{
+            document.getElementById("resonse").innerHTML = data.reason ;
             get();
         }
     })
 
 
 document.getElementById("nav-3").addEventListener("click", async ()=>{
-    document.getElementById("point-table-div").style.display = "block"
+    // fetch(`./point-table.json`)
+fetch(`https://api.cricapi.com/v1/series_points?apikey=${apikey}&id=bd830e89-3420-4df5-854d-82cfab3e1e04`)
+.then(res => res.json())
+.then((data)=>{
+    if(data.status === "success"){
+        let a = data.data
+        a.sort((b, a) => a.wins - b.wins)
+        a.forEach((i)=>{
+            let pointTable = document.getElementById("point-table")
+            let tr = document.createElement("tr")
+            tr.innerHTML = `<td class="td"><img src=${i.img}><h4>${i.teamname}</h4></td>
+            <td>${i.matches}</td>
+            <td>${i.wins}</td>
+            <td>${i.loss}</td>
+            <td>${i.ties}</td>
+            <td>${i.nr}</td>`
+            pointTable.appendChild(tr)
+        })
+        document.getElementById("point-table-div").style.display = "block"
     document.getElementById("point-table").style.display = "block"
     document.getElementById("score-card").style.display = "none"
     document.getElementById("team").style.display = "none"
     document.getElementById("squad").style.display = "none"
     document.getElementById("match").style.display = "none"
     document.getElementById("nav-bar").style.display = "none"
+    }
+    else{
+        document.getElementById("resonse").innerHTML = data.reason ;
+        get();
+    }
 })
-fetch(`./point-table.json`)
-    .then(res => res.json())
-    .then((data)=>{
-        if(data.status === "success"){
-            let a = data.data
-            a.sort((b, a) => a.wins - b.wins)
-            a.forEach((i)=>{
-                let pointTable = document.getElementById("point-table")
-                let tr = document.createElement("tr")
-                tr.innerHTML = `<td class="td"><img src=${i.img}><h4>${i.teamname}</h4></td>
-                <td>${i.matches}</td>
-                <td>${i.wins}</td>
-                <td>${i.loss}</td>
-                <td>${i.ties}</td>
-                <td>${i.nr}</td>`
-                pointTable.appendChild(tr)
-            })
-        }
-        else{
-            get();
-        }
-    })
+})
 
 document.getElementById("nav-1").addEventListener("click",()=>{
     document.getElementById("team").style.display = "block"
@@ -405,12 +406,6 @@ document.getElementById("score-btn").addEventListener("click",()=>{
     document.getElementById("squad").style.display = "none"
     document.getElementById("team").style.display = "none";
     document.getElementById("match").style.display = "none";
-    let scroeBtn = document.getElementById("score-btn")
-    scroeBtn.style.backgroundColor = "white"
-    scroeBtn.style.color = "red"
-    let squadBtn = document.getElementById("squad-btn")
-    squadBtn.style.backgroundColor = "red"
-    squadBtn.style.color = "white"
 })
 document.getElementById("nav-2").addEventListener("click",async()=>{
             let team = document.getElementById("team")
@@ -433,6 +428,7 @@ document.getElementById("nav-0").addEventListener("click",()=>{
     document.getElementById("point-table-div").style.display = "none";
     document.getElementById("nav").style.display = "none";
 })
+
 }
 
 
@@ -456,19 +452,16 @@ fetch(`./team.json`)
     })
 }
 else{
+    document.getElementById("resonse").innerHTML = data.reason ;
     get();
 }
 })
-function country(){
-    window.location.reload();
-}
 function get(){
     document.getElementById("error-overlay").style.display = "block"
     document.getElementById("error-popup").style.display = "block"
     document.getElementById("submit").addEventListener("click",(x)=>{
         x.preventDefault()
         apikey = document.getElementById("error").value ;
-        console.log(apikey);
         document.getElementById("error-overlay").style.display = "none"
         document.getElementById("error-popup").style.display = "none"
     })

@@ -1,5 +1,5 @@
 {
-    "apikey": "a01ad4f8-0ea2-4300-a22f-adfc3b461bdd",
+    "apikey": "69c0c2b0-e2fe-4892-a5ba-a3e68293befc",
     "data": {
         "info": {
             "id": "bd830e89-3420-4df5-854d-82cfab3e1e04",
@@ -707,7 +707,7 @@
                 "id": "e9e3e315-3a35-4386-b151-ab4a027d8b79",
                 "name": "South Africa vs Australia, 2nd Semi-Final (2nd v 3rd)",
                 "matchType": "odi",
-                "status": "Match not started",
+                "status": "South Africa opt to bat",
                 "venue": "Eden Gardens, Kolkata",
                 "date": "2023-11-16",
                 "dateTimeGMT": "2023-11-16T08:30:00",
@@ -727,10 +727,10 @@
                         "img": "https://g.cricapi.com/iapi/82-637877071839088912.webp?w=48"
                     }
                 ],
-                "fantasyEnabled": false,
-                "bbbEnabled": false,
+                "fantasyEnabled": true,
+                "bbbEnabled": true,
                 "hasSquad": true,
-                "matchStarted": false,
+                "matchStarted": true,
                 "matchEnded": false
             },
             {
@@ -1415,7 +1415,7 @@
                 "id": "01b40bfd-43ed-4d5b-a096-e812a9e320bd",
                 "name": "India vs New Zealand, 1st Semi-Final (1st v 4th)",
                 "matchType": "odi",
-                "status": "Match not started",
+                "status": "India won by 70 runs",
                 "venue": "Wankhede Stadium, Mumbai",
                 "date": "2023-11-15",
                 "dateTimeGMT": "2023-11-15T08:30:00",
@@ -1435,22 +1435,22 @@
                         "img": "https://g.cricapi.com/iapi/57-637877076980737903.webp?w=48"
                     }
                 ],
-                "fantasyEnabled": false,
-                "bbbEnabled": false,
+                "fantasyEnabled": true,
+                "bbbEnabled": true,
                 "hasSquad": true,
-                "matchStarted": false,
-                "matchEnded": false
+                "matchStarted": true,
+                "matchEnded": true
             }
         ]
     },
     "status": "success",
     "info": {
-        "hitsToday": 4,
+        "hitsToday": 99,
         "hitsUsed": 1,
         "hitsLimit": 100,
         "credits": 0,
-        "server": 5,
-        "queryTime": 35.3318,
+        "server": 9,
+        "queryTime": 34.8897,
         "s": 0,
         "cache": 0
     }

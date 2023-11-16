@@ -1,5 +1,5 @@
 {
-    "apikey": "a01ad4f8-0ea2-4300-a22f-adfc3b461bdd",
+    "apikey": "2099c6fb-5351-4275-b9d9-aa077b7c031e",
     "data": [
         {
             "teamname": "Afghanistan",
@@ -45,8 +45,8 @@
             "teamname": "India",
             "shortname": "IND",
             "img": "https://g.cricapi.com/iapi/31-637877061080567215.webp?w=48",
-            "matches": 9,
-            "wins": 9,
+            "matches": 10,
+            "wins": 10,
             "loss": 0,
             "ties": 0,
             "nr": 0
@@ -65,9 +65,9 @@
             "teamname": "New Zealand",
             "shortname": "NZ",
             "img": "https://g.cricapi.com/iapi/57-637877076980737903.webp?w=48",
-            "matches": 9,
+            "matches": 10,
             "wins": 5,
-            "loss": 4,
+            "loss": 5,
             "ties": 0,
             "nr": 0
         },
@@ -104,12 +104,12 @@
     ],
     "status": "success",
     "info": {
-        "hitsToday": 3,
+        "hitsToday": 76,
         "hitsUsed": 1,
         "hitsLimit": 100,
         "credits": 0,
-        "server": 3,
-        "queryTime": 24.4444,
+        "server": 5,
+        "queryTime": 34.0427,
         "s": 0,
         "cache": 0
     }
