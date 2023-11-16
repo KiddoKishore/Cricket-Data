@@ -412,7 +412,7 @@ document.getElementById("score-btn").addEventListener("click",()=>{
     squadBtn.style.backgroundColor = "red"
     squadBtn.style.color = "white"
 })
-document.getElementById("nav-2").addEventListener("click",async(x)=>{
+document.getElementById("nav-2").addEventListener("click",async()=>{
             let team = document.getElementById("team")
             team.style.display = "none"
             let match = document.getElementById("match")
@@ -423,6 +423,15 @@ document.getElementById("nav-2").addEventListener("click",async(x)=>{
             let squad = document.getElementById("squad")
             squad.style.display = "none"
             document.getElementById("point-table-div").style.display = "none"
+})
+document.getElementById("nav-0").addEventListener("click",()=>{
+    document.getElementById("parent").style.display = "block";
+    document.getElementById("child").style.display = "flex";
+    document.getElementById("team").style.display = "none";
+    document.getElementById("match").style.display = "none";
+    document.getElementById("match-details").style.display = "none";
+    document.getElementById("point-table-div").style.display = "none";
+    document.getElementById("nav").style.display = "none";
 })
 }
 
