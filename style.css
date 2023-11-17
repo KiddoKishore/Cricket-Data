@@ -137,10 +137,13 @@
     font-family: sans-serif;
     padding: 20px;
     font-size: 20px ;
-    margin-left: 30%;
-    margin-right: 30%;
     border: 2px solid black;
     border-collapse: collapse;
+}
+#table-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #table th{
     text-align: center;
