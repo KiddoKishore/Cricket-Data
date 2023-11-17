@@ -1,34 +1,30 @@
 let apikey = "69c0c2b0-e2fe-4892-a5ba-a3e68293befc"
-function update(event){
+async function update(event){
     document.getElementById('parent').style.display = 'none';
     document.getElementById('teams').style.display = 'block';
     document.getElementById("title").style.display = 'block';
     document.getElementById('squad').style.display = 'block';
     document.getElementById('nav').style.display = 'block';
 let country = event
-fetch(`./team.json`)
-    .then(res => res.json())
-    .then(data => {
-        if(data.status === 'success'){
-            let team = document.getElementById("team")
-            team.style.display = "block"
-            document.getElementById("score-card").style.display = "none"
-            let match = document.getElementById("match")
-            match.style.display ="none"
-            let matchDetails = document.getElementById("match-details")
-            matchDetails.style.display = "none"
+const fetchOne = await fetch(`./team.json`);
+    const dataOne = await fetchOne.json();
+        if(dataOne.status === 'success'){
+            document.getElementById("team").style.display = "block";
+            document.getElementById("score-card").style.display = "none";
+            document.getElementById("match").style.display = "none";
+            document.getElementById("match-details").style.display = "none";
             document.getElementById("point-table-div").style.display = "none"
-            let a = data.data
-            let b = a.find((x)=> x.teamName == country)
-            let n = country.replace(" ","-")
-            let countryFlags = n.toLowerCase()
-            let img = `https://cdn.countryflags.com/thumbs/${countryFlags}/flag-400.png`
+            const a = dataOne.data;
+            const b = a.find((x)=> x.teamName == country)
+            const n = country.replace(" ","-")
+            const countryFlags = n.toLowerCase()
+            const img = `https://cdn.countryflags.com/thumbs/${countryFlags}/flag-400.png`
             const {teamName,shortname} = b
             let teams = document.getElementById("teams")
             teams.innerHTML = `<img
             src=${img}
             alt="${teamName}"><br><h1>${shortname}</h1><h2>${teamName}</h2>`
-            let x = b.players
+            const x = b.players
             x.forEach(i => {
                 const {playerImg, name, id} = i
                 let players = document.getElementById("players")
@@ -36,31 +32,29 @@ fetch(`./team.json`)
                 details.setAttribute("class","details")
                 details.innerHTML =`<img src=${playerImg}><br><a href="#" class="view"><h2>${name}</h2></a>`
                 let view = details.querySelector(".view")
-                view.addEventListener("click",(x)=>{
+                view.addEventListener("click",async(x)=>{
                     x.preventDefault();
-                    fetch(`./team.json`)
-                    .then(res => res.json())
-                    .then((data)=>{
-                        if(data.status === "success"){
-                            let a = data.data
-                            let b = a.find((x)=> x.teamName === country)
-                            let c = b.players
-                            let d = c.find((p)=> p.id === id)
-                            let f = d.id
-                            fetch(`https://api.cricapi.com/v1/players_info?apikey=${apikey}&id=${f}`)
-                            .then(res => res.json())
-                            .then(data => {
-                                if(data.status === "success"){
-                                    let a = data.data
-                                       let date = new Date(a.dateOfBirth)
-                                       let DateOfBirth = date.toLocaleDateString()
-                            let bowlingStyle = a.bowlingStyle || "---" ;
-                            let battingStyle = a.battingStyle || "---";
-                            let role = a.role || "---";
-                            let country = a.country || "---";
-                            let name = a.name || "---";
-                            let placeOfBirth = a.placeOfBirth || "---";
-                            let overlay = document.getElementById("overlay")
+                    const fetchTwo = await fetch(`./team.json`);
+                    const dataTwo = await fetchTwo.json();
+                        if(dataTwo.status === "success"){
+                            const a = dataTwo.data
+                            const b = a.find((x)=> x.teamName === country)
+                            const c = b.players
+                            const d = c.find((p)=> p.id === id)
+                            const f = d.id
+                           const fetchThree = await fetch(`https://api.cricapi.com/v1/players_info?apikey=${apikey}&id=${f}`);
+                            const dataThree = await fetchThree.json();
+                                if(dataThree.status === "success"){
+                                    const a = dataThree.data
+                                       const date = new Date(a.dateOfBirth)
+                                       const DateOfBirth = date.toLocaleDateString()
+                            const bowlingStyle = a.bowlingStyle || "---" ;
+                            const battingStyle = a.battingStyle || "---";
+                            const role = a.role || "---";
+                            const country = a.country || "---";
+                            const name = a.name || "---";
+                            const placeOfBirth = a.placeOfBirth || "---";
+                            const overlay = document.getElementById("overlay")
                             let popup = document.getElementById("popup")
                         overlay.style.display = "block";
                         popup.style.display = "block";
@@ -90,138 +84,77 @@ fetch(`./team.json`)
                         <th>Bowling Style</th><td>${bowlingStyle}</td>
                         </tr>
                         </table></div></div>`
-                        let close = popup.querySelector(".close")
+                        const close = popup.querySelector(".close")
                         close.addEventListener("click",()=>{
-                            let popup = document.getElementById("popup")
-                            let overlay = document.getElementById("overlay")
-                            popup.style.display = "none"
-                            overlay.style.display = "none"
+                            document.getElementById("popup").style.display = "none";
+                            document.getElementById("overlay").style.display = "none";
                         })
                                        
                                 }
                                 else{
-                                    document.getElementById("resonse").innerHTML = data.reason ;
+                                    document.getElementById("resonse").innerHTML = dataThree.reason ;
                                     get();
                                 }
-                            })
-                            
-                            // fetch(`./players.json`)
-                            // .then(res => res.json())
-                            // .then((data)=>{
-                            //     if(data.status === "success"){
-                            //         let a = data.data.find((p)=> p.id === f)
-                            //         console.log(a);
-                            //         const {playerImg, name, dateOfBirth, country, placeOfBirth, role, battingStyle, bowlingStyle} = a
-                            //         let date = new Date(a.dateOfBirth)
-                            //         let DateOfBirth = date.toLocaleDateString()
-                            //         let overlay = document.getElementById("overlay")
-                            //         let popup = document.getElementById("popup")
-                            //     overlay.style.display = "block";
-                            //     popup.style.display = "block";
-                            //     popup.innerHTML = `<button class="close">X</button>
-                            //     <div id="flex"><img src=${playerImg}>
-                            //     <div>
-                            //     <table>
-                            //     <tr>
-                            //     <th>Name</th><td>${name}</td>
-                            //     </tr>
-                            //     <tr>
-                            //     <th>Date of Birth</th><td>${DateOfBirth}</td>
-                            //     </tr>
-                            //     <tr>
-                            //     <th>Place of Birth</th><td>${placeOfBirth}</td>
-                            //     </tr>
-                            //     <tr>
-                            //     <th>Country</th><td>${country}</td>
-                            //     </tr>
-                            //     <tr>
-                            //     <th>Role</th><td>${role}</td>
-                            //     </tr>
-                            //     <tr>
-                            //     <th>Batting Style</th><td>${battingStyle}</td>
-                            //     </tr>
-                            //     <tr>
-                            //     <th>Bowling Style</th><td>${bowlingStyle}</td>
-                            //     </tr>
-                            //     </table></div></div>`
-                            //     let close = popup.querySelector(".close")
-                            //     close.addEventListener("click",()=>{
-                            //         let popup = document.getElementById("popup")
-                            //         let overlay = document.getElementById("overlay")
-                            //         popup.style.display = "none"
-                            //         overlay.style.display = "none"
-                            //     })
-                            //     }
-                            // })
-                            // over
                         }
                         else{
-                            document.getElementById("resonse").innerHTML = data.reason ;
+                            document.getElementById("resonse").innerHTML = dataTwo.reason ;
                             get()
                         }
-                    })
                 })
                 players.appendChild(details)
             });
         }
         else{
-            document.getElementById("resonse").innerHTML = data.reason ;
+            document.getElementById("resonse").innerHTML = dataOne.reason ;
             get()
         }
-    })
- fetch(`./series.json`)
-    .then(res => res.json())
-    .then((data)=>{
-        if(data.status === "success"){
-            let a = data.data
-            let info = a.info
+const fetchFour =  await fetch(`./series.json`);
+        const dataFour = await fetchFour.json();
+        if(dataFour.status === "success"){
+            const a = dataFour.data
+            const info = a.info
             const {name} = info
             let end = info.enddate
             let  e = new Date(end)
             e.setFullYear(2023)
-            let  endDate = e.toLocaleDateString()
+            const  endDate = e.toLocaleDateString()
             let start = info.startdate
             let s = new Date(start)
-            let startDate = s.toLocaleDateString() 
+            const startDate = s.toLocaleDateString() 
             let title = document.getElementById("title")
             title.innerHTML =`<h1>${name}</h1><h3>${startDate} - ${endDate}</h3>`
-            let matchList = a.matchList
-            let m = matchList.filter((match)=> match.teams.includes(country))
+            const matchList = a.matchList
+            const m = matchList.filter((match)=> match.teams.includes(country))
             m.forEach(i =>{
-                let table = document.getElementById("table")
-                table.style.display = "block"
+                document.getElementById("table").style.display = "block";
                 let tr = document.createElement("tr")
-                const {name, date, status, venue, id} = i
-                let time = i.dateTimeGMT
+                const {name, date, status, venue, id, teams} = i
+                let time = i.dateTimeGMT;
                 let a = new Date(time)
                 a.setTime(a.getTime() + 330 * 60 * 1000)
-                let b = a.toLocaleTimeString();
+                const b = a.toLocaleTimeString();
                 tr.innerHTML =  `<td>${date}</td>
                 <td id="mat"><h3>${name}</h3>
                 <h4>${venue}</h4>
                 <a href="#" class="matchDetails">${status}</a></td>
                 <td>${b}</td>`
                 let matchDetail = tr.querySelector(".matchDetails")
-                matchDetail.addEventListener("click",(x)=>{
+                matchDetail.addEventListener("click",async(x)=>{
                     x.preventDefault()
-                    fetch(`https://api.cricapi.com/v1/match_scorecard?apikey=${apikey}&id=${id}`)
-                    .then(res => res.json())
-                    .then((data)=>{
-                        if(data.status === "success"){
-                            let match = document.getElementById("match")
-                            let navBar = document.getElementById("nav-bar")
-                            match.style.display = "none"
-                            navBar.style.display = "block"
-                            let matchDetails = document.getElementById("match-details")
-                            matchDetails.style.display = "block"
+                    const fetchFive = await fetch(`https://api.cricapi.com/v1/match_scorecard?apikey=${apikey}&id=${id}`);
+                          const dataFive = await fetchFive.json();
+                           if(dataFive.status === "success"){
+                            document.getElementById("match").style.display = "none";
+                            document.getElementById("nav-bar").style.display = "block";
+                            document.getElementById("match-details").style.display = "block";
                             document.getElementById("score-card").style.display = "block";
-                                let a = data.data
-                                let sc = a.score
-                                let sc1 = sc[0]
-                                let sc2 = sc[1]
-                                let score = a.scorecard
-                                let t1 = score[0]
-                                let t2 = score[1]
+                                const a = dataFive.data
+                                const sc = a.score
+                                const sc1 = sc[0]
+                                const sc2 = sc[1]
+                                const score = a.scorecard
+                                const t1 = score[0]
+                                const t2 = score[1]
                                 let teamTableOne = document.getElementById("team-table-1")
                                 teamTableOne.innerHTML = `
                                 <h1 id="team-1-inning">${t1.inning}</h1>
@@ -238,13 +171,13 @@ fetch(`./team.json`)
                               </table>`
                                 let team1Batting = t1.batting
                                 team1Batting.forEach(i =>{
-                                    let batsman = i.batsman
-                                    let dismissal = i["dismissal-text"]
-                                    let r = i.r
-                                    let b = i.b
-                                    let four = i["4s"]
-                                    let six = i["6s"]
-                                    let sr = i.sr
+                                    const batsman = i.batsman
+                                    const dismissal = i["dismissal-text"]
+                                    const r = i.r
+                                    const b = i.b
+                                    const four = i["4s"]
+                                    const six = i["6s"]
+                                    const sr = i.sr
                                     let teamOne = document.getElementById("team-1")
                                     let tr = document.createElement("tr")
                                     tr.innerHTML = `<td>${batsman.name}</td><td>${dismissal}</td><td>${r}</td><td>${b}</td><td>${four}</td><td>${six}</td><td>${sr}</td>`
@@ -252,7 +185,7 @@ fetch(`./team.json`)
                                 })
                                 let teamOne = document.getElementById("team-1")
                                 let tr = document.createElement("tr")
-                                let extra = t1.extras
+                                const extra = t1.extras
                                 tr.innerHTML = `<td colspan="2">Extra</td><td>${extra.r}</td><td colspan="4"></td>`  
                                 teamOne.appendChild(tr)
                                 let trr = document.createElement("tr")
@@ -275,13 +208,13 @@ fetch(`./team.json`)
                               </table>`
                                 let team2Batting = t2.batting
                                 team2Batting.forEach(i =>{
-                                    let batsman = i.batsman
-                                    let dismissal = i["dismissal-text"]
-                                    let r = i.r
-                                    let b = i.b
-                                    let four = i["4s"]
-                                    let six = i["6s"]
-                                    let sr = i.sr
+                                    const batsman = i.batsman
+                                    const dismissal = i["dismissal-text"]
+                                    const r = i.r
+                                    const b = i.b
+                                    const four = i["4s"]
+                                    const six = i["6s"]
+                                    const sr = i.sr
                                     let teamTwo = document.getElementById("team-2")
                                     let tr = document.createElement("tr")
                                     tr.innerHTML = `<td>${batsman.name}</td><td>${dismissal}</td><td>${r}</td><td>${b}</td><td>${four}</td><td>${six}</td><td>${sr}</td>`
@@ -289,7 +222,7 @@ fetch(`./team.json`)
                                 })
                                 let teamTwo = document.getElementById("team-2")
                                 let tr2 = document.createElement("tr")
-                                let extra2 = t2.extras
+                                const extra2 = t2.extras
                                 tr2.innerHTML =  `<td colspan="2">Extra</td><td>${extra2.r}</td><td colspan="4"></td>`
                                 teamTwo.appendChild(tr2)
                                 let trr2 = document.createElement("tr")
@@ -298,35 +231,29 @@ fetch(`./team.json`)
                             
                         }
                         else{
-                            document.getElementById("resonse").innerHTML = data.reason ;
+                            document.getElementById("resonse").innerHTML = dataFive.reason ;
                             get()
                         }
-                    document.getElementById("squad-btn").addEventListener("click", (x)=>{
+                    document.getElementById("squad-btn").addEventListener("click",async (x)=>{
                         x.preventDefault()
-                        console.log(data)
-                        let a = data.data
-                        let t = a.teams
+                        const t = teams
                         let t1 = t[0]
                         let t2 = t[1]
-                        let matchDetails = document.getElementById("match-details")
-                        matchDetails.style.display = "block";
-                        let scoreCard = document.getElementById("score-card")
-                        scoreCard.style.display = "none"
-                        let squad = document.getElementById("squad")
-                        squad.style.display = "flex"
-                        fetch(`./team.json`)
-                        .then(res => res.json())
-                        .then((data)=>{
-                            if(data.status === "success"){
-                                let a = data.data
-                                let s0 = a.find(x => x.teamName === t1)
-                                let s1 = a.find(x => x.teamName === t2)
+                        document.getElementById("match-details").style.display = "block";
+                        document.getElementById("score-card").style.display = "none";
+                        document.getElementById("squad").style.display = "flex";
+                        const fetchSix = await fetch(`./team.json`);
+                              const dataSix = await fetchSix.json();
+                              if(dataSix.status === "success"){
+                                let a = dataSix.data
+                                const s0 = a.find(x => x.teamName === t1)
+                                const s1 = a.find(x => x.teamName === t2)
                                 let squadOne = document.getElementById("squad-1")
                                 squadOne.innerHTML = `<h1>${s0.teamName}</h1>`
                                 let squadTwo = document.getElementById("squad-2")
                                 squadTwo.innerHTML = `<h1>${s1.teamName}</h1>`
-                                let one = s0.players
-                                let two = s1.players
+                                const one = s0.players
+                                const two = s1.players
                                 one.forEach((i)=>{
                                     let squadOne = document.getElementById("squad-1")
                                     let player = document.createElement("div")
@@ -343,30 +270,26 @@ fetch(`./team.json`)
                                 })
                             }
                             else{
-                                document.getElementById("resonse").innerHTML = data.reason ;
+                                document.getElementById("resonse").innerHTML = dataSix.reason ;
                                 get();
                             }
-                        })
                     })
-                })
                 })
                 table.appendChild(tr)
             })
         }
         else{
-            document.getElementById("resonse").innerHTML = data.reason ;
+            document.getElementById("resonse").innerHTML = dataFour.reason ;
             get();
         }
-    })
 
 
 document.getElementById("nav-3").addEventListener("click", async ()=>{
     // fetch(`./point-table.json`)
-fetch(`https://api.cricapi.com/v1/series_points?apikey=${apikey}&id=bd830e89-3420-4df5-854d-82cfab3e1e04`)
-.then(res => res.json())
-.then((data)=>{
-    if(data.status === "success"){
-        let a = data.data
+const fetchSeven = await fetch(`https://api.cricapi.com/v1/series_points?apikey=${apikey}&id=bd830e89-3420-4df5-854d-82cfab3e1e04`)
+       const dataSeven = await fetchSeven.json();
+       if(dataSeven.status === "success"){
+        const a = dataSeven.data
         a.sort((b, a) => a.wins - b.wins)
         a.forEach((i)=>{
             let pointTable = document.getElementById("point-table")
@@ -388,10 +311,9 @@ fetch(`https://api.cricapi.com/v1/series_points?apikey=${apikey}&id=bd830e89-342
     document.getElementById("nav-bar").style.display = "none"
     }
     else{
-        document.getElementById("resonse").innerHTML = data.reason ;
+        document.getElementById("resonse").innerHTML = dataSeven.reason ;
         get();
     }
-})
 })
 
 document.getElementById("nav-1").addEventListener("click",()=>{
@@ -420,25 +342,18 @@ document.getElementById("nav-2").addEventListener("click",async()=>{
             document.getElementById("point-table-div").style.display = "none"
 })
 document.getElementById("nav-0").addEventListener("click",()=>{
-    document.getElementById("parent").style.display = "block";
-    document.getElementById("child").style.display = "flex";
-    document.getElementById("team").style.display = "none";
-    document.getElementById("match").style.display = "none";
-    document.getElementById("match-details").style.display = "none";
-    document.getElementById("point-table-div").style.display = "none";
-    document.getElementById("nav").style.display = "none";
+    window.location.reload()
 })
 
 }
 
 
-
-fetch(`./team.json`)
-.then(res => res.json())
-.then((x)=>{
-    if(x.status === "success"){
-    let data = x.data
-    data.forEach((i)=> {
+async function home(){
+const fetchEight = await fetch(`./team.json`);
+       const dataEight = await fetchEight.json();
+       if(dataEight.status === "success"){
+        const data = dataEight.data
+        data.forEach((i)=> {
         let child = document.getElementById("child")
         let div = document.createElement("div")
         div.setAttribute('class','flag')
@@ -452,10 +367,11 @@ fetch(`./team.json`)
     })
 }
 else{
-    document.getElementById("resonse").innerHTML = data.reason ;
+    document.getElementById("resonse").innerHTML = dataEight.reason ;
     get();
 }
-})
+}
+home();
 function get(){
     document.getElementById("error-overlay").style.display = "block"
     document.getElementById("error-popup").style.display = "block"

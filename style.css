@@ -137,8 +137,9 @@
     font-family: sans-serif;
     padding: 20px;
     font-size: 20px ;
+    margin-left: 7%;
+    margin-right: 7.5%;
     border: 2px solid black;
-    margin: 50px 150px;
     border-collapse: collapse;
 }
 #table th{
