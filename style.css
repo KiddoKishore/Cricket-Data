@@ -162,7 +162,7 @@
     padding: 10px;
     border-bottom: 2px solid black;
 }
-#color{
+.color{
     background-color: black;
     color: red;
 }

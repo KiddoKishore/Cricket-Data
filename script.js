@@ -141,7 +141,7 @@ const fetchFour =  await fetch(`./series.json`);
                 let matchDetail = tr.querySelector(".matchDetails")
                 matchDetail.addEventListener("click",async(x)=>{
                     x.preventDefault()
-                    const fetchFive = await fetch(`https://api.cricapi.com/v1/match_scorecard?apikey=${apikey}&id=${id}`);
+                    const fetchFive = await fetch(`https://api.cricapi.com/v1/match_scorecard?apikey=${apikey}&id=${id}`)
                           const dataFive = await fetchFive.json();
                            if(dataFive.status === "success"){
                             document.getElementById("match").style.display = "none";
@@ -289,6 +289,17 @@ document.getElementById("nav-3").addEventListener("click", async ()=>{
 const fetchSeven = await fetch(`https://api.cricapi.com/v1/series_points?apikey=${apikey}&id=bd830e89-3420-4df5-854d-82cfab3e1e04`)
        const dataSeven = await fetchSeven.json();
        if(dataSeven.status === "success"){
+        let pointTableDiv = document.getElementById("point-table-div")
+        pointTableDiv.innerHTML = `<table id="point-table">
+        <tr>
+          <th>Teams</th>
+          <th>Match</th>
+          <th>Won</th>
+          <th>Loss</th>
+          <th>Ties</th>
+          <th>NR</th>
+        </tr>
+      </table>`
         const a = dataSeven.data
         a.sort((b, a) => a.wins - b.wins)
         a.forEach((i)=>{
