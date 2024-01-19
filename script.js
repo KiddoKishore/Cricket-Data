@@ -313,7 +313,7 @@ const fetchSeven = await fetch(`https://api.cricapi.com/v1/series_points?apikey=
             <td>${i.nr}</td>`
             pointTable.appendChild(tr)
         })
-        document.getElementById("point-table-div").style.display = "block"
+        document.getElementById("point-table-div").style.display = "flex"
     document.getElementById("point-table").style.display = "block"
     document.getElementById("score-card").style.display = "none"
     document.getElementById("team").style.display = "none"
